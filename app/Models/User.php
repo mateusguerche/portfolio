@@ -21,6 +21,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'cpf',
+        'birth_date',
+        'avatar',
+        'contract_terms',
+        'status',
+        'code_password_recovery',
     ];
 
     /**
@@ -41,4 +47,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Criptografa a senha.
+     *
+     * @param  string $value
+     * @return string
+     */
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }
